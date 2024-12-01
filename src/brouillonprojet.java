@@ -12,7 +12,7 @@ public class BrouillonProjet
 	{
 		
 		int i, x;
-		String ligne = "";  // Initialise ligne avant de l'utiliser
+		String ligne = "";  // Initialise ligne avant de l'utiliser hehe
 		String fichierPhysic;
 		char[] mot_devine = new char[0];  // Initialise mot_devine avec une taille par d�faut
 
