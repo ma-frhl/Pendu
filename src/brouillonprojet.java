@@ -22,7 +22,7 @@ public class BrouillonProjet
 		if (niveau == 1)
 		{
 			fichierPhysic = "facile.dat";
-		} 
+		}
 		else if (niveau == 2) 
 		{
 			fichierPhysic = "moyen.dat";

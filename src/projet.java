@@ -2,7 +2,7 @@ import java.io.*;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
-public class projet
+public class Projet
 
 {
 	static BufferedReader flux = new BufferedReader(new InputStreamReader(System.in));
