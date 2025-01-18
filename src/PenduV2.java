@@ -9,7 +9,7 @@ public class PenduV2 {
     public static final char[] ALPHABET = "abcdefghijklmnopqrstuvwxyz".toCharArray();
 
     public static String getProjectPath = Paths.get("").toAbsolutePath().toString();
-    public static final String PATH = getProjectPath + "\\src\\data\\";
+    public static final String PATH = getProjectPath + "\\data\\";
 
     public static void main(String[] args) throws IOException {
         System.out.println(" Il était une fois, un homme répondant au nom de Jack, injustement condamné à la pendaison pour vol...");
