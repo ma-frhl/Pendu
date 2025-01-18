@@ -9,7 +9,7 @@ public class PenduV1 {
     public static final char[] ALPHABET = "abcdefghijklmnopqrstuvwxyz".toCharArray();
 
     public static String getProjectPath = Paths.get("").toAbsolutePath().toString();
-	public static final String PATH = getProjectPath + "\\data\\";
+    public static final String PATH = getProjectPath + "\\src\\data\\";
 
     public static void main(String[] args) throws IOException {
         System.out.println(" Il était une fois, un homme répondant au nom de Jack, injustement condamné à la pendaison pour vol...");
@@ -65,7 +65,14 @@ public class PenduV1 {
                 fichierPhysic = "facile.dat";
         }
 
-        BufferedReader reader = new BufferedReader(new FileReader(PATH+fichierPhysic));
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new FileReader(PATH + fichierPhysic));
+        } catch (FileNotFoundException e) {
+            System.err.println("Erreur : Le fichier " + fichierPhysic + " est introuvable dans le répertoire " + PATH);
+            System.exit(1); // Quitter le programme en cas d'erreur
+        }
+
         List<String> mots = new ArrayList<>();
         String ligne;
 
@@ -147,17 +154,17 @@ public class PenduV1 {
         String fichierPhysic = "podium.dat";
         String ligne = nom + " " + resultat + " avec " + erreurs + " erreurs. | mot : " + mot;
 
-        PrintWriter fichier = new PrintWriter(new FileWriter(fichierPhysic, true));
+        PrintWriter fichier = new PrintWriter(new FileWriter(PATH+fichierPhysic, true));
         fichier.println(ligne);
         fichier.close();
 
-        System.out.println("\nRésultats enregistrés dans le fichier"+ fichierPhysic +" !");
+        System.out.println("\nRésultats enregistrés dans le fichier" + fichierPhysic + " !");
         afficherContenu(fichierPhysic);
     }
 
     public static void afficherContenu(String fichierPhysic) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(fichierPhysic));
-        System.out.println("\n=== Contenu du fichier "+fichierPhysic+" ===");
+        BufferedReader reader = new BufferedReader(new FileReader(PATH+fichierPhysic));
+        System.out.println("\n=== Contenu du fichier " + fichierPhysic + " ===");
         String ligne;
         while ((ligne = reader.readLine()) != null) {
             System.out.println(ligne);
