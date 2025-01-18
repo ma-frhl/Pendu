@@ -9,7 +9,7 @@ public class brouillon_choix_mot
 	{
 		int i, x;
 		String ligne;
-		char[] mot_devine = new char[ligne.length]
+		char[] mot_devine = new char[ligne.length];
 		
 		
 		// creer fichier facile, moyen, difficile
@@ -31,7 +31,7 @@ public class brouillon_choix_mot
 		i = 0; 
 		
 		
-		while (i<x) //tant qu'on est pas à la bonne ligne tiree au sort, on descend dans le fichier jusqu'a la bonne ligne dont on garde le mot
+		while (i<x) //tant qu'on est pas ï¿½ la bonne ligne tiree au sort, on descend dans le fichier jusqu'a la bonne ligne dont on garde le mot
 		{
 			ligne = fichierPhysic.readLine();
 		}
