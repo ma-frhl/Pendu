@@ -140,18 +140,19 @@ public class PenduV2 {
 
     public static void afficherDessin(int erreurs) {
         String[] dessin = {
-                "\n\n\n\n\n\n",
-                "\n\n\n\n\n\n========",
-                "\n\n\n\n\n |\n========",
-                "\n\n\n\n |\n |\n========",
-                "\n\n\n |\n |\n |\n========",
-                "\n\n O\n |\n |\n |\n========",
-                "\n\n O\n/|\n |\n |\n========",
-                "\n\n O\n/|\\\n |\n |\n========",
-                "\n\n O\n/|\\\n |\n/ \n========",
-                "\n\n O\n/|\\\n |\n/ \\\n========",
-                "\n  ____\n |    |\n O    |\n/|\\   |\n/ \\   |\n========"
-        };
+            "  \n  \n  \n  \n  \n========",                    // Étape 0 : la base
+            "  |\n  |\n  |\n  |\n  |\n========",              // Étape 1 : le mat principal (vertical)
+            "  ____\n  |\n  |\n  |\n  |\n========",           // Étape 2 : le mat horizontal
+            "  ____\n |    |\n  |\n  |\n  |\n========",       // Étape 3 : la corde
+            "  ____\n |    |\n O    |\n  |\n  |\n========",   // Étape 4 : tête
+            "  ____\n |    |\n O    |\n |    |\n  |\n========", // Étape 5 : corps
+            "  ____\n |    |\n O    |\n/|    |\n  |\n========", // Étape 6 : bras gauche
+            "  ____\n |    |\n O    |\n/|\\   |\n  |\n========", // Étape 7 : bras droit
+            "  ____\n |    |\n O    |\n/|\\   |\n/     |\n========", // Étape 8 : jambe gauche
+            "  ____\n |    |\n O    |\n/|\\   |\n/ \\   |\n========", // Étape 9 : jambe droite
+            "  ____\n |    |\n O    |\n/|\\   |\n/ \\   |\n========"  // Étape 10 : terminé
+    };
+    
         System.out.println(dessin[erreurs]);
     }
 
