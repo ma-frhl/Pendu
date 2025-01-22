@@ -1,0 +1,1 @@
+javac PenduV3.java && java PenduV3

@@ -1,0 +1,44 @@
+vide
+Etat de la matrice Passe :
+----------------------------------------------
+m    m    m    m    m    m
+m    B0   0    0    0    m
+m    0    0    0    0    m
+m    0    0    0    0    m
+m    0    0    0    N0   m
+m    m    m    m    m    m
+----------------------------------------------
+Etat de la matrice Present :
+----------------------------------------------
+m    m    m    m    m    m
+m    B1   0    0    0    m
+m    0    0    0    0    m
+m    0    0    0    0    m
+m    0    0    0    N1   m
+m    m    m    m    m    m
+----------------------------------------------
+Etat de la matrice Futur :
+----------------------------------------------
+m    m    m    m    m    m
+m    B2   0    0    0    m
+m    0    0    0    0    m
+m    0    0    0    0    m
+m    0    0    0    N2   m
+m    m    m    m    m    m
+----------------------------------------------
+ le joueur 0 correspond au joueur Blanc
+ le joueur 0 correspond au joueur Noir
+Reserve 0 : 0
+Focus 0 : 0
+Nombre de pions dans le passe 0 : 0
+Nombre de pions dans le present 0 : 0
+Nombre de pions dans le futur 0 : 0
+Nombre d eres possedes 0 : 0
+
+Reserve 1 : 0
+Focus 1 : 0
+Nombre de pions dans le passe 1 : 0
+Nombre de pions dans le present 1 : 0
+Nombre de pions dans le futur 1 : 0
+Nombre d eres possedes 1 : 0
+
