@@ -1,26 +1,35 @@
 import java.io.*;
 import java.util.*;
 
+/**
+ * Jeu du pendu avec une interface graphique.
+ * Chaque méthode correspond à une étape ou une action du jeu.
+ */
 public class PenduV3 {
 
+    // Chemin des ressources (images et données)
     private static final String IMAGES_PATH = "./images/";
     private static final String DATA_PATH = "./data/";
-    private static final int MAX_ERRORS = 10;
-    private static String joueur = "";
-    private static String message = "";
+    private static final int MAX_ERRORS = 10; // Nombre maximum d'erreurs autorisées
+    private static String joueur = ""; // Nom du joueur
+    private static String message = ""; // Message d'état ou d'erreur
 
-    
+    /**
+     * Point d'entrée du programme. Initialise l'écran graphique et lance la page d'accueil.
+     */
     public static void main(String[] args) throws IOException {
-        // Initialisation graphique
         EcranGraphique.init(100, 100, 1000, 800, 1000, 800, "Jeu du Pendu");
         EcranGraphique.clear();
         afficherPageLancement();
     }
 
+    /**
+     * Affiche la page de lancement où le joueur peut entrer son nom.
+     */
     public static void afficherPageLancement() throws IOException {
         EcranGraphique.clear();
 
-        // Affichage du fond et instructions
+        // Affichage du fond et du message d'accueil
         EcranGraphique.setColor(0, 0, 128);
         EcranGraphique.fillRect(0, 0, 1000, 800);
         EcranGraphique.setColor(255, 255, 255);
@@ -49,6 +58,9 @@ public class PenduV3 {
         introduction();
     }
 
+    /**
+     * Affiche une introduction au jeu et au personnage de Jack.
+     */
     public static void introduction() throws IOException {
         EcranGraphique.clear();
         EcranGraphique.setColor(0, 0, 0);
@@ -57,6 +69,7 @@ public class PenduV3 {
         EcranGraphique.setColor(255, 255, 255);
         EcranGraphique.drawString(10, 150, EcranGraphique.COLABA8x13, "Il etait une fois, un homme repondant au nom de Jack, injustement condamne a la pendaison pour vol...");
 
+        // Bouton "En savoir davantage"
         EcranGraphique.setColor(0, 0, 200);
         EcranGraphique.fillRect(380, 400, 260, 50);
         EcranGraphique.setColor(255, 255, 255);
@@ -64,7 +77,6 @@ public class PenduV3 {
         EcranGraphique.flush();
 
         boolean boutonClique = false;
-
         while (!boutonClique) {
             int mouseState = EcranGraphique.getMouseState();
             int x = EcranGraphique.getMouseX();
@@ -78,6 +90,9 @@ public class PenduV3 {
         bienvenue();
     }
 
+    /**
+     * Explique les règles du jeu et introduit le défi au joueur.
+     */
     public static void bienvenue() throws IOException {
         EcranGraphique.clear();
         EcranGraphique.setColor(0, 0, 0);
@@ -99,7 +114,6 @@ public class PenduV3 {
         EcranGraphique.flush();
 
         boolean boutonClique = false;
-
         while (!boutonClique) {
             int mouseState = EcranGraphique.getMouseState();
             int x = EcranGraphique.getMouseX();
@@ -111,11 +125,13 @@ public class PenduV3 {
         }
 
         int niveau = choisirNiveau();
-
-        // Lancer le jeu
         startGame(niveau);
     }
 
+    /**
+     * Permet au joueur de choisir un niveau de difficulté.
+     * @return Le niveau choisi (1, 2 ou 3).
+     */
     public static int choisirNiveau() throws IOException {
         EcranGraphique.clear();
         EcranGraphique.setColor(0, 0, 0);
@@ -125,7 +141,7 @@ public class PenduV3 {
         EcranGraphique.drawString(300, 200, EcranGraphique.COLABA8x13, "A quel point voulez-vous jouer avec sa vie ?");
         EcranGraphique.drawString(300, 250, EcranGraphique.COLABA8x13, "1 : Un peu");
         EcranGraphique.drawString(300, 300, EcranGraphique.COLABA8x13, "2 : Beaucoup");
-        EcranGraphique.drawString(300, 350, EcranGraphique.COLABA8x13, "3 : Meurs en fait Jack");
+        EcranGraphique.drawString(300, 350, EcranGraphique.COLABA8x13, "3 : J\'adore jouer avec sa vie !");
 
         int niveau = 0;
         while (niveau < 1 || niveau > 3) {
@@ -138,6 +154,10 @@ public class PenduV3 {
         return niveau;
     }
 
+    /**
+     * Lance la partie principale en fonction du niveau choisi.
+     * @param niveau Niveau de difficulté choisi par le joueur.
+     */
     public static void startGame(int niveau) throws IOException {
         String mot = choisirMot(niveau);
         char[] motCache = new char[mot.length()];
@@ -174,6 +194,12 @@ public class PenduV3 {
         afficherFinPartie(gagne, mot);
     }
 
+    /**
+     * Choisit un mot aléatoire à deviner en fonction du niveau choisi.
+     * @param niveau Niveau de difficulté (1, 2 ou 3).
+     * @return Le mot à deviner.
+     * @throws IOException Si le fichier contenant les mots est introuvable ou vide.
+     */
     public static String choisirMot(int niveau) throws IOException {
         String fichierMot;
         switch (niveau) {
@@ -205,6 +231,13 @@ public class PenduV3 {
         return mots.get(new Random().nextInt(mots.size()));
     }
 
+    /**
+     * Enregistre le résultat de la partie (victoire ou défaite) dans un fichier podium.dat.
+     * Le fichier contient le joueur, le mot, et le nombre d'erreurs.
+     * @param gagne Indique si le joueur a gagné (true) ou perdu (false).
+     * @param mot Le mot qui devait être deviné.
+     * @param nb_erreurs Le nombre d'erreurs commises pendant la partie.
+     */
     public static void enregistrerResultat(boolean gagne, String mot, int nb_erreurs) {
         String resultat = (gagne ? "Victoire" : "Defaite") + " - Joueur : " + joueur + " - Mot : " + mot + " - Erreurs : " + nb_erreurs;
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(DATA_PATH + "podium.dat", true))) {
@@ -215,6 +248,12 @@ public class PenduV3 {
         }
     }
 
+
+    /**
+     * Permet au joueur de saisir une lettre. Valide la saisie pour s'assurer qu'il s'agit bien d'une lettre.
+     * @param lettresEssayees Liste des lettres déjà essayées pour éviter les doublons.
+     * @return La lettre saisie par le joueur.
+     */
     public static char obtenirLettreUtilisateur(ArrayList<Character> lettresEssayees) {
         char lettre = '\0';
         boolean lettreValide = false;
@@ -230,6 +269,14 @@ public class PenduV3 {
         return lettre;
     }
 
+
+        /**
+     * Affiche l'état actuel du jeu, y compris l'image correspondant au nombre d'erreurs,
+     * le mot partiellement découvert, les lettres essayées, et un message d'état.
+     * @param motCache Tableau contenant les lettres découvertes du mot (ou '_' pour celles non découvertes).
+     * @param lettresEssayees Liste des lettres déjà essayées par le joueur.
+     * @param erreurs Nombre actuel d'erreurs commises.
+     */
     public static void afficherEtat(char[] motCache, ArrayList<Character> lettresEssayees, int erreurs) {
         EcranGraphique.clear();
         String imagePath = IMAGES_PATH + erreurs + ".png";
@@ -256,6 +303,14 @@ public class PenduV3 {
         EcranGraphique.flush();
     }
 
+
+        /**
+     * Affiche la fin de la partie avec un message indiquant si le joueur a gagné ou perdu,
+     * ainsi que le mot à deviner. Propose également un bouton pour rejouer.
+     * @param gagne Indique si le joueur a gagné (true) ou perdu (false).
+     * @param mot Le mot qui devait être deviné.
+     * @throws IOException Si une erreur d'affichage se produit.
+     */
     public static void afficherFinPartie(boolean gagne, String mot) throws IOException {
         EcranGraphique.clear();
         if (gagne) {
@@ -286,3 +341,11 @@ public class PenduV3 {
         afficherPageLancement();
     }
 }
+
+// Pistes d'amlélioration :
+// - Ajouter des pages de fin sur le même modèle que la page intro donc avec du texte de type oh nan jack est mort ou ce que vous voulez
+// Si la personne clique sur rejouter, relancer... mais pas vraiment genre refaire une page clone de celle de base mais avec un petit détail qui change genre hmmm... vous n'avez pas assez joué avec la vie de jack comme ça ?
+// Changer le nom en cas de rejouer (faire une var nom qui recup un nom dans un fichier txt âr exemple sur le même modèle que les mots) et changer jack dans les strings par la var 
+// 
+// Si vous avez des questions ou quoi que ce soit demandez et amusez-vous bien vous avez déjà une belle base pour essayer de voir comment implémenter vos idées
+// Amusez-vous bien !
